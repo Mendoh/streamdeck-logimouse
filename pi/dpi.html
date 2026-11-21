@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  body { background:#2d2d2d; color:#d8d8d8; font:12px "Segoe UI",sans-serif; margin:0; padding:10px 12px; }
+  label { display:block; margin-bottom:4px; color:#969696; }
+  input { width:100%; box-sizing:border-box; background:#3d3d3d; color:#d8d8d8; border:1px solid #555; border-radius:3px; padding:5px 6px; }
+  p { color:#8a8a8a; margin:6px 0 0; line-height:1.5; }
+</style></head>
+<body>
+  <label for="list">DPIリスト（カンマ区切り）</label>
+  <input id="list" placeholder="400,800,1600,3200">
+  <p>押すたびに次の値へ。最後の次は先頭に戻ります。範囲は 100〜25600 程度（機種依存）。</p>
+<script>
+let ws, uuid;
+function connectElgatoStreamDeckSocket(port, inUUID, registerEvent, info, actionInfo) {
+  uuid = inUUID;
+  const settings = (JSON.parse(actionInfo).payload || {}).settings || {};
+  const input = document.getElementById("list");
+  input.value = settings.dpiList || "400,800,1600,3200";
+  ws = new WebSocket("ws://127.0.0.1:" + port);
+  ws.onopen = () => ws.send(JSON.stringify({ event: registerEvent, uuid }));
+  input.addEventListener("change", () =>
+    ws.send(JSON.stringify({ event: "setSettings", context: uuid, payload: { dpiList: input.value } })));
+}
+</script>
+</body></html>

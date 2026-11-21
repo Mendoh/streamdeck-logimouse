@@ -1,0 +1,54 @@
+{
+  "Name": "Logi Mouse (no G HUB)",
+  "Version": "1.0.0.0",
+  "Author": "local",
+  "Description": "Logicool / Logitech mouse battery, DPI, report rate and onboard mode via HID++ — works without G HUB.",
+  "Icon": "imgs/plugin",
+  "Category": "Logi Mouse",
+  "CategoryIcon": "imgs/category",
+  "CodePath": "bin/launch.js",
+  "Nodejs": { "Version": "20", "Debug": "disabled" },
+  "SDKVersion": 2,
+  "Software": { "MinimumVersion": "6.4" },
+  "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
+  "UUID": "com.local.logimouse",
+  "Actions": [
+    {
+      "UUID": "com.local.logimouse.battery",
+      "Name": "バッテリー",
+      "Tooltip": "マウスのバッテリー残量を表示（押すと即更新）",
+      "Icon": "imgs/battery",
+      "States": [{ "Image": "imgs/key", "ShowTitle": false }],
+      "Controllers": ["Keypad"],
+      "SupportedInMultiActions": false
+    },
+    {
+      "UUID": "com.local.logimouse.dpi",
+      "Name": "DPI切替",
+      "Tooltip": "押すたびに設定したDPIリストを順に切替",
+      "Icon": "imgs/dpi",
+      "PropertyInspectorPath": "pi/dpi.html",
+      "States": [{ "Image": "imgs/key", "ShowTitle": false }],
+      "Controllers": ["Keypad"],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.local.logimouse.rate",
+      "Name": "レポートレート切替",
+      "Tooltip": "125 / 250 / 500 / 1000 Hz を順に切替",
+      "Icon": "imgs/rate",
+      "States": [{ "Image": "imgs/key", "ShowTitle": false }],
+      "Controllers": ["Keypad"],
+      "SupportedInMultiActions": true
+    },
+    {
+      "UUID": "com.local.logimouse.mode",
+      "Name": "オンボード/ホスト切替",
+      "Tooltip": "BOARD: マウス内蔵メモリの設定 / HOST: このプラグインの設定",
+      "Icon": "imgs/mode",
+      "States": [{ "Image": "imgs/key", "ShowTitle": false }],
+      "Controllers": ["Keypad"],
+      "SupportedInMultiActions": true
+    }
+  ]
+}
